@@ -1,0 +1,432 @@
+:root{
+    --main-colour: #738678;
+}
+
+* {
+    margin:0;
+    padding: 0;
+    box-sizing:border-box;
+    font-family: "Lato", sans-serif;
+}
+body{
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    margin-top: 50px;
+    justify-content: center;
+    padding-bottom: 30px;
+    background-color: #738678;
+}
+.container{
+    position: relative;
+    width: 1200px;
+    min-height: 850px;
+    margin: 0;
+    padding: 5px;
+    color: #fff;
+    display: flex;
+    border-radius: 10px;
+    background-color: #455354;
+}
+.left{
+    width: 60%;
+    padding: 20px;
+}
+.calendar{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    color: #878895;
+    border-radius: 5px;
+    background-color: #fff;
+}
+.calendar .month{
+    width: 100%;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    font-weight: 500;
+    text-transform: capitalize;
+}
+.calendar .month .prev,
+.calendar .month .next{
+    cursor: pointer;
+}
+.calendar .month .prev:hover,
+.calendar .month .next:hover{
+    color: var(--main-colour);
+}
+.prev-button {
+    position: absolute;
+    left: 40px;
+}
+.next-button {
+    position: absolute;
+    right: 40px;
+}
+.next-button,
+.prev-button{
+    font-size: 2rem;
+    color: #cbcccd;
+    background-color: #fff;
+    border: none;
+    height: 40px;
+    width: 40px;
+}
+.next-button:hover,
+ .prev-button:hover{
+    color: var(--main-colour);
+    background-color: #e3e6e4;
+    border-radius: 4px;
+    border-color: white;
+    border: 10px;
+}
+.calendar .weekdays{
+    width: 100%;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    font-size: 1rem;
+    font-weight: 500;
+    text-transform: capitalize;
+}
+.calendar .weekdays div{
+    width: 14.28%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.calendar .days{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 0 20px;
+    font-size:1rem;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+.calendar .days .day{
+    width: 14.28%;
+    height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--main-colour);
+    border: 1px solid #f5f5f5;
+}
+.calendar .days .day:not(.prev-date, .next-date):hover{
+    color: #fff;
+    background-color: #bec8c3;
+    font-size: 1.2rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Shadow for buttons */
+    border: none;
+}
+.calendar .days .prev-date,
+.calendar .days .next-date{
+    color: #b3b3b3;
+}
+.calendar .days .active {
+  position: relative;
+  font-size: 2rem;
+  color: #fff;
+  background-color: var(--main-colour);
+}
+.calendar .days .active::before{
+    content: "";
+    position: absolute;
+    top:0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+.calendar .days .today{
+    font-size: 2rem;
+}
+.calendar .days .event{
+    position: relative;
+}
+.calendar .days .event::after{
+    content: "";
+    position: absolute;
+    bottom: 10%;
+    left: 50%;
+    width: 75%;
+    height: 6px;
+    border-radius: 30px;
+    transform: translateX(-50%);
+    background-color: var(--main-colour);
+}
+
+.calendar .days .day:hover.event::after {
+  background-color: #fff;
+}
+.calendar .days .active.event::after {
+  background-color: #fff;
+  bottom: 20%;
+}
+.calendar .days .active.event {
+  padding-bottom: 10px;
+}
+.calendar .goto-today{
+    width:100%;
+    height: 50px;
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    margin-bottom: 20px;
+    color: var(--main-colour);
+
+}
+.calendar .goto-today .goto{
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
+    overflow: hidden;
+    border: 1px solid var(--main-colour);
+}
+.calendar .goto-today .goto input{
+    width: 100%;
+      height: 30px;
+      outline: none;
+      border: none;
+      border-radius: 5px;
+      padding: 0 20px;
+      color: var(--main-colour);
+      border-radius: 5px;
+}
+.calendar .goto-today button{
+    padding: 5px 10px;
+    border:1px solid var(--main-colour);
+    border-radius: 5px;
+    background-color: transparent;
+    cursor: pointer;
+    color: var(--main-colour);
+}
+.calendar .goto-today button:hover{
+    background-color: var(--main-colour);
+    color: #fff;
+}
+.calendar .goto-today .date-input{
+    width: 100%;
+  height: 30px;
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  padding: 0 20px;
+  color: var(--primary-clr);
+  border-radius: 5px;
+}
+
+.container .right {
+  position: relative;
+  width: 40%;
+  min-height: 100%;
+  padding: 20px 0;
+}
+
+.right .today-date {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+  padding-left: 70px;
+  margin-top: 50px;
+  margin-bottom: 20px;
+  text-transform:capitalize;
+}
+.today-date .event-day {
+  font-size: 2rem;
+  font-weight: 500;
+}
+.today-date .event-date {
+  font-size: 1rem;
+  font-weight: 400;
+  color: #878895;
+}
+.events {
+  position: relative;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: left;
+  flex-direction:column;
+}
+/* Event container styling */
+.events .event {
+    position: relative;
+    width: 95%;
+    min-height: 70px;
+    display: flex;
+    justify-content: space-between; /* Align title and time */
+    flex-direction: column;
+    padding: 10px 20px;
+    color: #fff;
+    cursor: pointer;
+    background-color: #333;
+    margin-bottom: 10px;
+    border-radius: 8px;
+}
+
+.events .event-title {
+    font-size: 1.2rem;
+    font-weight: 400;
+    margin: 0;
+    color: #fff;
+}
+
+
+.checkmark-btn {
+    width: 30px;
+    height: 30px;
+    background-color: transparent; /* Green color for checkmark */
+    color: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: right;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.checkmark-btn:hover {
+    background-color: #45a049; /* Slightly darker green on hover */
+}
+
+.add-event-wrapper{
+    position: absolute;
+    bottom: 100px;
+    left: 50%;
+    width: 90%;
+    max-height: 0;
+    overflow: hidden;
+    border-radius: 5px;
+    background-color: white;
+    transform: translateX(-50%);
+    transition: max-height 0.5s;
+}
+
+.add-event-wrapper.active{
+    max-height: 300px;
+}
+.add-event-header{
+    width:100%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    color: #372c4f;
+    border-bottom: 1px solid #f5f5f5;
+}
+.add-event-header .close{
+    width: 40px;
+    height: 40px;
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    font-size: 1.4rem;
+
+}
+.add-event-header .close:hover{
+    color: gray;
+    font-weight:600;
+}
+.add-event-header .title{
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+.add-event-body{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 20px;
+}
+.add-event-body .add-event-input{
+    width: 100%;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+.add-event-body .add-event-input input {
+  width: 100%;
+  height: 100%;
+  outline: none;
+  border: none;
+  border-bottom: 1px solid #f5f5f5;
+  padding: 0 10px;
+  font-size: 1rem;
+  font-weight: 400;
+  color: #373c4f;
+}
+.add-event-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.add-event-footer .add-event-btn {
+  height: 40px;
+  font-size: 1rem;
+  font-weight: 500;
+  outline: none;
+  border: none;
+  color: #fff;
+  background-color: var(--main-colour);
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 5px 10px;
+  border: 1px solid var(--main-colour);
+}
+.add-event-footer .add-event-btn:hover {
+  background-color: transparent;
+  color: var(--main-colour);
+}
+
+.add-event {
+  position: absolute;
+  bottom: 30px;
+  right: 30px;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  color: #878895;
+  border: 2px solid #878895;
+  opacity: 0.5;
+  border-radius: 50%;
+  background-color: transparent;
+  cursor: pointer;
+}
+.add-event:hover{
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 1);
+}
+
+
+
