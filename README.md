@@ -14,7 +14,7 @@ A simple and minimalistic calendar application to manage and organize events eff
 
 ## How it looks
 
-![Calendar Screenshot](calendar-img.png)
+![Calendar Screenshot](src/calendar-img.png)
 
 ## How to Use
 
