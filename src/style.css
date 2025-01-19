@@ -130,7 +130,7 @@ body{
     color: #fff;
     background-color: #bec8c3;
     font-size: 1.2rem;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Shadow for buttons */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
     border: none;
 }
 .calendar .days .prev-date,
@@ -270,13 +270,13 @@ body{
   align-items: left;
   flex-direction:column;
 }
-/* Event container styling */
+
 .events .event {
     position: relative;
     width: 95%;
     min-height: 70px;
     display: flex;
-    justify-content: space-between; /* Align title and time */
+    justify-content: space-between;
     flex-direction: column;
     padding: 10px 20px;
     color: #fff;
@@ -297,7 +297,7 @@ body{
 .checkmark-btn {
     width: 30px;
     height: 30px;
-    background-color: transparent; /* Green color for checkmark */
+    background-color: transparent;
     color: white;
     border: none;
     border-radius: 50%;
@@ -310,7 +310,7 @@ body{
 }
 
 .checkmark-btn:hover {
-    background-color: #45a049; /* Slightly darker green on hover */
+    background-color: #45a049;
 }
 
 .add-event-wrapper{
