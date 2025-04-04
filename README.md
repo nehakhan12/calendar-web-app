@@ -16,7 +16,7 @@ A simple and minimalistic calendar application to manage and organize events eff
 
 ![Calendar Screenshot](src/calendar-img.png)
 
-## How to Use
+## Main Feature
 
 1. **Add an Event**:
     - Click the "Add Event" button
@@ -33,3 +33,7 @@ A simple and minimalistic calendar application to manage and organize events eff
     - Use the left and right arrows to navigate through months
     - Use the "Today" button to return to the current date
     - Use the date input field to jump to a specific month and year
+  
+## How to use
+    https://github.com/nehakhan12/calendar-web-app.git
+   - simply clone the repo and open it in your IDE such as VSCode, then you can run the HTML file and it should be working!
