@@ -7,7 +7,6 @@ const calendar = document.querySelector(".calendar"),
   gotoBtn = document.querySelector(".goto-btn"),
   dateInput = document.querySelector(".date-input");
 
-
 const addEventBtn = document.querySelector(".add-event"),
       addEventWrapper = document.querySelector(".add-event-wrapper"),
       addEventCloseBtn = document.querySelector(".close"),
@@ -18,7 +17,6 @@ const eventDay = document.querySelector(".event-day"),
     eventsContainer = document.querySelector(".events"),
     addEventSubmit = document.querySelector(".add-event-btn"),
     addEventTitle = document.querySelector(".event-name ");
-
 
 let today = new Date();
 let activeDay;
@@ -46,8 +44,10 @@ let eventsArr = [];
 //call any events in storage
 getEvents();
 
-
-//function to add days in days with class day and prev-date next-date on previous month and next month days and active on today
+/**
+ * Initializes the calendar by generating days for the current month,
+ * including previous and next month's days, and marking today and events
+ */
 function initCalendar() {
   const firstDay = new Date(year, month, 1);
   const lastDay = new Date(year, month + 1, 0);
@@ -61,10 +61,12 @@ function initCalendar() {
 
   let days = "";
 
+  // add days from previous month
   for (let x = day; x > 0; x--) {
     days += `<div class="day prev-date">${prevDays - x + 1}</div>`;
   }
 
+  // add days for current month
   for (let i = 1; i <= lastDate; i++) {
    let event = false;
        eventsArr.forEach((eventObj) => {
@@ -82,11 +84,9 @@ function initCalendar() {
       year === new Date().getFullYear() &&
       month === new Date().getMonth()
     ) {
-
         activeDay =i;
         getActiveDay(i);
         updateEvents(i);
-
 
         if (event) {
             days += `<div class="day today active event">${i}</div>`;
@@ -103,6 +103,7 @@ function initCalendar() {
     }
   }
 
+  // add days from next month
   for (let j = 1; j <= nextDays; j++) {
     days += `<div class="day next-date">${j}</div>`;
   }
@@ -110,7 +111,8 @@ function initCalendar() {
   addListener();
 }
 
-//function to add month and year on prev and next button
+
+ // moves the calendar to the previous month
 function prevMonth() {
   month--;
   if (month < 0) {
@@ -120,6 +122,8 @@ function prevMonth() {
   initCalendar();
 }
 
+
+ // moves the calendar to the next month
 function nextMonth() {
   month++;
   if (month > 11) {
@@ -129,11 +133,14 @@ function nextMonth() {
   initCalendar();
 }
 
+// event listeners for navigation buttons
 prev.addEventListener("click", prevMonth);
 next.addEventListener("click", nextMonth);
 
+// initialize calendar on page load
 initCalendar();
 
+// event listener for today button
 todayBtn.addEventListener("click", () => {
   today = new Date();
   month = today.getMonth();
@@ -141,6 +148,7 @@ todayBtn.addEventListener("click", () => {
   initCalendar();
 });
 
+// format date input field (MM/YYYY)
 dateInput.addEventListener("input", (e) => {
   dateInput.value = dateInput.value.replace(/[^0-9/]/g, "");
   if (dateInput.value.length === 2) {
@@ -156,8 +164,11 @@ dateInput.addEventListener("input", (e) => {
   }
 });
 
+// event listener for go-to date button
 gotoBtn.addEventListener("click", gotoDate);
 
+
+ // Navigates to a specific month/year based on user input
 function gotoDate() {
   console.log("here");
   const dateArr = dateInput.value.split("/");
@@ -172,7 +183,7 @@ function gotoDate() {
   alert("Invalid Date");
 }
 
-
+// event listeners for showing/hiding the add event form
 addEventBtn.addEventListener("click", ()=>{
     addEventWrapper.classList.toggle("active");
 });
@@ -180,12 +191,14 @@ addEventCloseBtn.addEventListener("click", () =>{
     addEventWrapper.classList.remove("active");
 });
 
+// close add event form when clicking outside
 document.addEventListener("click", (e) => {
   if (e.target !== addEventBtn && !addEventWrapper.contains(e.target)) {
     addEventWrapper.classList.remove("active");
   }
 });
 
+// format time input fields (HH:MM)
 addEventFrom.addEventListener("input", (e) => {
   addEventFrom.value = addEventFrom.value.replace(/[^0-9:]/g, "");
   if (addEventFrom.value.length === 2) {
@@ -206,6 +219,8 @@ addEventTo.addEventListener("input", (e) => {
   }
 });
 
+
+ // adds click event listeners to all calendar days
 function addListener() {
   const days = document.querySelectorAll(".day");
   days.forEach((day) => {
@@ -260,6 +275,8 @@ function addListener() {
   });
 }
 
+
+ // updates the event sidebar with the selected day's information
 function getActiveDay(date) {
   const day = new Date(year, month, date);
   const dayName = day.toString().split(" ")[0];
@@ -267,6 +284,7 @@ function getActiveDay(date) {
   eventDate.innerHTML = date + " " + months[month] + " " + year;
 }
 
+ // updates the events list for the selected day
 function updateEvents(date) {
   let events = "";
   eventsArr.forEach((event) => {
@@ -299,18 +317,18 @@ function updateEvents(date) {
   saveEvents();
 }
 
+// event listener for submitting a new event
 addEventSubmit.addEventListener("click", () => {
   const eventTitle = addEventTitle.value;
   const eventTimeFrom = addEventFrom.value;
   const eventTimeTo = addEventTo.value;
 
-
     if (eventTitle === "" || eventTimeFrom === "" || eventTimeTo === "") {
     alert("Please fill all the fields");
     return;
-
     }
-    //check correct time format 24 hour
+
+    // validate time format
     const timeFromArr = eventTimeFrom.split(":");
     const timeToArr = eventTimeTo.split(":");
     if (
@@ -324,6 +342,8 @@ addEventSubmit.addEventListener("click", () => {
       alert("Invalid Time Format");
       return;
     }
+
+    // convert to 12-hour format
     const timeFrom = convertTime(eventTimeFrom);
     const timeTo = convertTime(eventTimeTo);
 
@@ -334,6 +354,7 @@ addEventSubmit.addEventListener("click", () => {
 
     let eventAdded = false;
 
+    // add event to existing day if it exists
     if (eventsArr.length > 0) {
         eventsArr.forEach((item) => {
           if (
@@ -347,6 +368,7 @@ addEventSubmit.addEventListener("click", () => {
         });
     }
 
+    // create new day entry if no existing day
     if (!eventAdded) {
         eventsArr.push({
           day: activeDay,
@@ -356,23 +378,23 @@ addEventSubmit.addEventListener("click", () => {
         });
     }
 
+    // reset form
     addEventWrapper.classList.remove("active");
-
     addEventTitle.value = "";
     addEventFrom.value = "";
     addEventTo.value = "";
     updateEvents(activeDay);
 
+    // add event indicator to calendar day
     const activeDayEl = document.querySelector(".day.active");
     if (!activeDayEl.classList.contains("event")) {
     activeDayEl.classList.add("event");
     }
-
-
 });
 
+
+// converts 24-hour time to 12-hour format with AM/PM
 function convertTime(time) {
-  //convert time to 24 hour format
   let timeArr = time.split(":");
   let timeHour = timeArr[0];
   let timeMin = timeArr[1];
@@ -382,15 +404,15 @@ function convertTime(time) {
   return time;
 }
 
-
+// event listener for deleting events
 eventsContainer.addEventListener("click", (e) => {
-  // Check if the clicked element has the "checkmark-btn" class
+  // check if the clicked element has the "checkmark-btn" class
   if (e.target.classList.contains("checkmark-btn")) {
     if (confirm("Are you sure you want to delete this event?")) {
-      // Find the title of the event to delete
+      // find the title of the event to delete
       const eventTitle = e.target.closest(".event").querySelector(".event-title").innerHTML;
 
-      // Loop through the events array to find and remove the event
+      // loop through the events array to find and remove the event
       eventsArr.forEach((event) => {
         if (
           event.day === activeDay &&
@@ -403,11 +425,11 @@ eventsContainer.addEventListener("click", (e) => {
             }
           });
 
-          // If no events left on a day, remove that day from eventsArr
+          //if no events left on a day, remove that day from eventsArr
           if (event.events.length === 0) {
             eventsArr.splice(eventsArr.indexOf(event), 1);
 
-            // Remove the "event" class from the day if it's now empty
+            //remove the "event" class from the day if it's now empty
             const activeDayEl = document.querySelector(".day.active");
             if (activeDayEl.classList.contains("event")) {
               activeDayEl.classList.remove("event");
@@ -416,18 +438,18 @@ eventsContainer.addEventListener("click", (e) => {
         }
       });
 
-      // Update the displayed events
+      //update the displayed events
       updateEvents(activeDay);
     }
   }
 });
 
-//for the local storage of events
+// saves events to local storage
 function saveEvents() {
   localStorage.setItem("events", JSON.stringify(eventsArr));
 }
 
-//function to get events from local storage
+ //retrieves events from local storage
 function getEvents() {
   //check if events are already saved in local storage then return event else nothing
   if (localStorage.getItem("events") === null) {
@@ -435,3 +457,5 @@ function getEvents() {
   }
   eventsArr.push(...JSON.parse(localStorage.getItem("events")));
 }
+
+module.exports = { initCalendar };
